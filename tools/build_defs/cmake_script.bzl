@@ -106,7 +106,9 @@ _CMAKE_CACHE_ENTRIES_CROSSTOOL = {
     "CMAKE_RANLIB": struct(value = "CMAKE_RANLIB", replace = True),
     "CMAKE_C_ARCHIVE_CREATE": struct(value = "CMAKE_C_ARCHIVE_CREATE", replace = False),
     "CMAKE_CXX_ARCHIVE_CREATE": struct(value = "CMAKE_CXX_ARCHIVE_CREATE", replace = False),
+    "CMAKE_C_LINK_EXECUTABLE": struct(value = "CMAKE_C_LINK_EXCUTABLE", replace = True),
     "CMAKE_CXX_LINK_EXECUTABLE": struct(value = "CMAKE_CXX_LINK_EXECUTABLE", replace = True),
+    "CMAKE_LD": struct(value = "CMAKE_LD", replace = True),
     "CMAKE_C_FLAGS": struct(value = "CMAKE_C_FLAGS_INIT", replace = False),
     "CMAKE_CXX_FLAGS": struct(value = "CMAKE_CXX_FLAGS_INIT", replace = False),
     "CMAKE_ASM_FLAGS": struct(value = "CMAKE_ASM_FLAGS_INIT", replace = False),
@@ -252,6 +254,8 @@ def _fill_crossfile_from_toolchain(workspace_name, target_os, tools, flags):
             "-o <TARGET>",
             "<LINK_LIBRARIES>",
         ])
+        dict["CMAKE_C_LINK_EXECUTABLE"] = dict["CMAKE_CXX_LINK_EXECUTABLE"]
+        dict["CMAKE_LD"] = dict["CMAKE_CXX_LINK_EXECUTABLE"]
 
     if flags.cc:
         dict["CMAKE_C_FLAGS_INIT"] = _join_flags_list(workspace_name, flags.cc)
